@@ -70,13 +70,13 @@ public class CsvReader {
         int numberOfStudents = 0;
         int average = 0;
 
-        while ((line = br.readLine()) != null) {
-
-            int score = student2.getNumberOfExercisesSolved();
+        for (int i=0; i<roster.size(); i++) {
+            Trainee student = roster.get([i]);
+            int score = student.getNumberOfExercisesSolved();
             totalScore = totalScore + score;
             numberOfStudents++;
-            average = totalScore / numberOfStudents;
         }
+        average = (totalScore / numberOfStudents);
         System.out.println("**********************");
         System.out.println(numberOfStudents);
         System.out.println(average);
