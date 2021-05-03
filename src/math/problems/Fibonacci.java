@@ -12,7 +12,7 @@ public class Fibonacci {
          */
 
        Fibonacci fibonacci = new Fibonacci();
-       fibonacci.fibonacciCalculation(10);
+       fibonacci.fibonacciCalculation(40);
 
 
     }
