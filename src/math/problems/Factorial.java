@@ -9,5 +9,31 @@ public class Factorial {
          *
          */
 
+        Factorial factorial= new Factorial();
+        int x= factorial.factorialCalculationWithIteration(5);
+        System.out.println(x);
+
+        int y =factorial.factorialCalculationWithRecursion(5);
+        System.out.println(y);
+
     }
-}
+        public int factorialCalculationWithIteration (int number){
+
+        int factorial=1 ;
+        int finalFactorial=1;
+        for(int i=number; i>1; i--) {
+            factorial = i;
+            finalFactorial = factorial *finalFactorial;
+        }
+        return finalFactorial;
+        }
+
+        public int factorialCalculationWithRecursion(int number){
+        if (number >= 1){
+            return number*factorialCalculationWithRecursion(number-1);
+        }
+        else
+            return 1;
+        }
+    }
+

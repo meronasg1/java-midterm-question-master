@@ -71,7 +71,7 @@ public class CsvReader {
         int average = 0;
 
         for (int i=0; i<roster.size(); i++) {
-            Trainee student = roster.get([i]);
+            Trainee student = roster.get(i);
             int score = student.getNumberOfExercisesSolved();
             totalScore = totalScore + score;
             numberOfStudents++;
