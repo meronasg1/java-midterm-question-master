@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CsvReader {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         /*
          Coma Separated Value(CSV) of your CodeLab status is downloaded and it parsed.
          Based on number of solution you solved, message is generated for you.
@@ -60,10 +60,46 @@ public class CsvReader {
                 System.out.print("You are in a bad shape !-->                           ");
                 System.out.println(student.getFirstName() + " " + student.getLastName() + " " + student.getNumberOfExercisesSolved());
             }
+
+
         }
+
+        Trainee student2 = new Trainee();
+        int totalScore = 0;
+
+        int numberOfStudents = 0;
+        int average = 0;
+
+        while ((line = br.readLine()) != null) {
+
+            int score = student2.getNumberOfExercisesSolved();
+            totalScore = totalScore + score;
+            numberOfStudents++;
+            average = totalScore / numberOfStudents;
+        }
+        System.out.println("**********************");
+        System.out.println(numberOfStudents);
+        System.out.println(average);
+    }
+}
 
         // implement the average score of the class here
 
-    }
+//        public int aveCalculation (){
+//
+//            int totalScore = 0;
+//            Trainee student = new Trainee();
+//            int numberOfStudents = 0;
+//            int average = 0;
+//
+//            while ((br.readLine()) != null) {
+//
+//                int score = student.getNumberOfExercisesSolved();
+//                totalScore = totalScore + score;
+//                numberOfStudents++;
+//                average = totalScore / numberOfStudents;
+//
+//            }
+//            return average;
 
-}
+

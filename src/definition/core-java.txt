@@ -1,9 +1,14 @@
 Please answer the below core-java Questions:
 
 What is programing language?
-Ans :
+Ans: A programming language is a set of instructions that produces a many types of results. They are use in computer programming to implement algorithms.
 
 What jdk contains or composed of and define each components?
+The JDK consists of multiple that software components that are needed to develop java based applications.
+It consists of compiler, interpreter, disassembler, java documentation, header file generator, debugger and Java applet viewer
+Compiler: The java compiler reads class and interface definitions written in java programming language and compiles it to a bytecode class file.
+Interpreter: The java interpreter essentially takes the .class file produced by the java compiler and converts into machine language that the machine will understand.
+
 What is IDE?
 What are the IDEs available in the market to support java?
 Explain the entire java life cycle.
