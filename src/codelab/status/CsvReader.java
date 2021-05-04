@@ -78,28 +78,8 @@ public class CsvReader {
         }
         average = (totalScore / numberOfStudents);
         System.out.println("**********************");
-        System.out.println(numberOfStudents);
-        System.out.println(average);
+        System.out.println("There are "+ numberOfStudents+ " students in the class");
+        System.out.println("The average score for the class is " + average);
     }
 }
-
-        // implement the average score of the class here
-
-//        public int aveCalculation (){
-//
-//            int totalScore = 0;
-//            Trainee student = new Trainee();
-//            int numberOfStudents = 0;
-//            int average = 0;
-//
-//            while ((br.readLine()) != null) {
-//
-//                int score = student.getNumberOfExercisesSolved();
-//                totalScore = totalScore + score;
-//                numberOfStudents++;
-//                average = totalScore / numberOfStudents;
-//
-//            }
-//            return average;
-
 
