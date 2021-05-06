@@ -30,11 +30,11 @@ public class PrimeNumber {
         System.out.println(primeNumberArray);
 
         ConnectToSqlDB connectToSqlDB = new ConnectToSqlDB();
-        connectToSqlDB.insertDataFromArrayToSqlTable(primeNumberArray, "Prime_Numbers", "SortingNumbers");
+        connectToSqlDB.insertDataFromArrayToSqlTable2(primeNumberArray, "Primes", "PrimeNumbers");
 
         List<String> primeNumbersFromDB = null;
         try {
-            primeNumbersFromDB = connectToSqlDB.readDataBase("Prime_Numbers", "SortingNumbers");
+            primeNumbersFromDB = connectToSqlDB.readDataBase("Primes", "PrimeNumbers");
         } catch (Exception e) {
             e.printStackTrace();
         }

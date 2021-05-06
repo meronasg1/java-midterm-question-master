@@ -38,13 +38,47 @@ public class Sort {
 
     public int[] insertionSort(int[] array) {
         final long startTime = System.currentTimeMillis();
-        int[] list = array;
         //implement here
+        for(int i = 0; i<array.length; i++){
+            for(int j = i; j>0; j--){
+                if(array[j] < array[j-1]){
+                    swap(array, j, j-1);
+                }
+            }
+        }
 
         final long endTime = System.currentTimeMillis();
         final long executionTime = endTime - startTime;
         this.executionTime = executionTime;
-        return list;
+        return array;
+    }
+
+    public int[] bubbleSort(int[] array) {
+        final long startTime = System.currentTimeMillis();
+        int n = array.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (array[j] > array[j + 1]) {
+                    swap(array, j, j + 1);
+                }
+            }
+        }
+        final long endTime = System.currentTimeMillis();
+        final long executionTime = endTime - startTime;
+        this.executionTime = executionTime;
+        return array;
+    }
+
+    private void swap(int[] array, int i, int j){
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    private void printArray(int[] array){
+        for(int i = 0; i<array.length; i++){
+            System.out.println(array[i]);
+        }
     }
 
 }

@@ -24,6 +24,20 @@ public class Articles {
     public Articles() {
     }
 
+    @Override
+    public String toString() {
+        return "Articles{" +
+                "author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", urlToImage='" + urlToImage + '\'' +
+                ", publishedAt='" + publishedAt + '\'' +
+                ", content='" + content + '\'' +
+                ", source=" + source +
+                '}';
+    }
+
     public String getAuthor() {
         return author;
     }

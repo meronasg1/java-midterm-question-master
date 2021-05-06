@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 public class ConnectToSqlDB {
@@ -55,6 +56,34 @@ public class ConnectToSqlDB {
                 //System.out.format("%s, %s\n", name, id);
                 user = new User(name, id, dob);
                 list.add(user);
+
+            }
+            st.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return list;
+    }
+    public List<Student> readStudentsFromSqlTable(String tableName) {
+        List<Student> list = new ArrayList<>();
+        Student student  = null;
+        try {
+            Connection conn = connectToSqlDatabase();
+            String query = "SELECT * FROM " + tableName +";";
+            // create the java statement
+            Statement st = conn.createStatement();
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query);
+            // iterate through the java resultset
+            while (rs.next()) {
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                String score = rs.getString("score");
+                String id = rs.getString("student_id");
+                //System.out.format("%s, %s\n", name, id);
+                student = new Student(firstName,lastName,score,id);
+                list.add(student);
 
             }
             st.close();
@@ -135,10 +164,66 @@ public class ConnectToSqlDB {
             e.printStackTrace();
         }
     }
+    public void insertDataFromArrayToSqlTable2(int[] ArrayData, String tableName, String columnName) {
+        try {
+            connectToSqlDatabase();
+            ps = connect.prepareStatement("DROP TABLE IF EXISTS `" + tableName + "`;");
+            ps.executeUpdate();
+            ps = connect.prepareStatement(
+                    "CREATE TABLE `" + tableName + "` (`ID` int(11) NOT NULL AUTO_INCREMENT,"+columnName + " bigint(20) DEFAULT NULL,  PRIMARY KEY (`ID`) );");
+            ps.executeUpdate();
+            for (int n = 0; n < ArrayData.length; n++) {
+                ps = connect.prepareStatement("INSERT INTO " + tableName + " ( " + columnName + " ) VALUES(?)");
+                ps.setInt(1, ArrayData[n]);
+                ps.executeUpdate();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    public void insertDataFromStudentListToSqlTable3(List<Student> list, String tableName) {
+        try {
+            connectToSqlDatabase();
+            ps = connect.prepareStatement("DROP TABLE IF EXISTS `" + tableName + "`;");
+            ps.executeUpdate();
+            ps = connect.prepareStatement(
+                    "CREATE TABLE `" + tableName + "` (`ID` int(11) NOT NULL AUTO_INCREMENT,`first_name` varchar(20) DEFAULT NULL, " +
+                            "`last_name` varchar(20) DEFAULT NULL, " +
+                            "`score` varchar(20) DEFAULT NULL, " +
+                            "`student_id` varchar(20) DEFAULT NULL, " +
+                            " PRIMARY KEY (`ID`) );");
+            ps.executeUpdate();
+            for (Student st : list) {
+                ps = connect.prepareStatement("INSERT INTO " + tableName + " (first_name,last_name,score,student_id) VALUES(?,?,?,?)");
+                ps.setString(1, st.firstName);
+                ps.setString(2, st.lastName);
+                ps.setString(3, st.score);
+                ps.setString(4, st.id);
+                ps.executeUpdate();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void insertDataFromStringToSqlTable(String ArrayData, String tableName, String columnName) {
         try {
             connectToSqlDatabase();
+            ps = connect.prepareStatement("DROP TABLE IF EXISTS `" + tableName + "`;");
+            ps.executeUpdate();
+            ps = connect.prepareStatement(
+                    "CREATE TABLE `" + tableName + "` (`ID` int(11) NOT NULL AUTO_INCREMENT,"+columnName + " text DEFAULT NULL,  PRIMARY KEY (`ID`) );");
+            ps.executeUpdate();
             ps = connect.prepareStatement("INSERT INTO " + tableName + " ( " + columnName + " ) VALUES(?)");
             ps.setString(1, ArrayData);
             ps.executeUpdate();
@@ -179,6 +264,58 @@ public class ConnectToSqlDB {
                 ps = connect.prepareStatement("INSERT INTO " + tableName + " ( " + columnName + " ) VALUES(?)");
                 ps.setObject(1, st);
                 ps.executeUpdate();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertDataFromArrayListToSqlTableSortedData(List<String> list, String tableName, String columnName) {
+        try {
+            connectToSqlDatabase();
+            ps = connect.prepareStatement("DROP TABLE IF EXISTS `" + tableName + "`;");
+            ps.executeUpdate();
+            ps = connect.prepareStatement(
+                    "CREATE TABLE `" + tableName + "` (`ID` int(11) NOT NULL AUTO_INCREMENT, "+ columnName +  " text DEFAULT NULL,  PRIMARY KEY (`ID`) );");
+            ps.executeUpdate();
+            for (String st : list) {
+                ps = connect.prepareStatement("INSERT INTO " + tableName + " ( " + columnName + " ) VALUES(?)");
+                ps.setObject(1, st);
+                ps.executeUpdate();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insertDataFromMapToSqlTable(Map<String, List <String>> map, String tableName, String columnName1, String columnName2) {
+        try {
+            connectToSqlDatabase();
+            ps = connect.prepareStatement("DROP TABLE IF EXISTS `" + tableName + "`;");
+            ps.executeUpdate();
+            ps = connect.prepareStatement(
+                    "CREATE TABLE `" + tableName + "` (`ID` int(11) NOT NULL AUTO_INCREMENT, "+ columnName1 +  " text DEFAULT NULL,"+ columnName2 +  " text DEFAULT NULL, PRIMARY KEY (`ID`) );");
+            ps.executeUpdate();
+            for (Map.Entry<String, List<String>> st : map.entrySet()) {
+                String state = st.getKey();
+                List<String> cities = st.getValue();
+                for (String city: cities){
+                    ps = connect.prepareStatement("INSERT INTO " + tableName + " ( " + columnName1 +  " , " + columnName2+ " ) VALUES(?,?)");
+                    ps.setObject(1, state);
+                    ps.setObject(2, city);
+                    ps.executeUpdate();
+                }
+
             }
 
         } catch (IOException e) {

@@ -13,6 +13,11 @@ public class FortuneEmployee {
      * Use MySql Database to store data and retrieve data.
      **/
     public static void main(String[] args) {
+        Employee employee = new EmployeeInfo("Meron Asgedom",1);
+        employee.assignDepartment();
+        employee.assignStartingSalary();
+        employee.assignPerformance();
+        employee.benefitLayout();
 
     }
 

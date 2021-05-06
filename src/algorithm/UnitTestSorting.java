@@ -22,6 +22,27 @@ public class UnitTestSorting {
         }
 
         //Now implement Unit test for the soring algorithm
+        int[] unSortedArray2 = {6, 9, 2, 5, 1, 0, 4};
+        //apply unsorted array to insertionSort.
+        sort.insertionSort(unSortedArray2);
+        //verify if the unsorted array is sorted by the selection sort algorithm.
+        try {
+            Assert.assertEquals(sortedArray, unSortedArray2, "Array is not Sorted");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+
+        //Now implement Unit test for the soring algorithm
+        int[] unSortedArray3 = {6, 9, 2, 5, 1, 0, 4};
+        //apply unsorted array to insertionSort.
+        sort.bubbleSort(unSortedArray3);
+        //verify if the unsorted array is sorted by the selection sort algorithm.
+        try {
+            Assert.assertEquals(sortedArray, unSortedArray3, "Array is not Sorted");
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+
 
     }
 }

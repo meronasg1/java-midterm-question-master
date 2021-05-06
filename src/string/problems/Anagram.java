@@ -8,46 +8,35 @@ public class Anagram {
         //Write a Java Program to check if the two String are Anagram. Two String are called Anagram when there is
         //same character but in different order.For example,"CAT" and "ACT", "ARMY" and "MARY".
         System.out.println(isAnagram("CAT", "ACT"));
-        System.out.println(isAnagram("ARMY", "MARY"));
-        System.out.println(isAnagram("CATS", "ACT"));
-
+        System.out.println(isAnagram("CAT", "ADT"));
+        System.out.println(isAnagram("CATTEL", "CATEL"));
 
     }
 
-    public static boolean isAnagram (String word1, String word2 ){
-        HashMap<Character,Integer> word1LetterCount = getLetterCount(word1);
-        HashMap<Character,Integer> word2LetterCount = getLetterCount(word2);
-
-        //return false if size of string different
-        if (word1LetterCount.size()!= word2LetterCount.size()){
+    private static boolean isAnagram(String firstString, String secondString){
+        HashMap<Character,Integer> letterCount1 = getLetterCount(firstString);
+        HashMap<Character,Integer> letterCount2 = getLetterCount(secondString);
+        if(letterCount1.size() != letterCount2.size()){
             return false;
         }
-        //return false there are different characters
-        for (Character character: word1LetterCount.keySet()){
-            if(word1LetterCount.get(character) != word2LetterCount.get(character)){
+        for(Character character : letterCount1.keySet()){
+            if(letterCount1.get(character) != letterCount2.get(character)){
                 return false;
             }
         }
         return true;
-
-
-
-
-
     }
 
-    //a method that return key value pairs. Array of characters and the number of characters in that array
-    public static HashMap<Character,Integer>getLetterCount(String word ){
-        HashMap<Character, Integer>letterCount = new HashMap<>();
-
-        for (char character: word.toCharArray() ){
-            if (letterCount.get(character)==null){
+    private static HashMap<Character, Integer> getLetterCount(String word) {
+        HashMap<Character,Integer> letterCount = new HashMap<>();
+        for(char character : word.toCharArray()){
+            if(letterCount.get(character) == null){
                 letterCount.put(character, 1);
             }
-            else
-                letterCount.put(character, letterCount.get(character)+1);
+            else {
+                letterCount.put(character,letterCount.get(character)+1);
+            }
         }
         return letterCount;
     }
-
 }
